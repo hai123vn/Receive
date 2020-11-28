@@ -1,0 +1,65 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card mb-0">
+        <div class="card-header">
+          <strong>{{ 'approval.Title' | translate }}</strong>
+        </div>
+        <form class="form-horizontal">
+          <div class="card-body">
+            <div class="form-group row">
+              <label class="col-md-2 col-form-label" for="userID"><strong
+                  class="float-right">{{ 'approval.CardNumber' | translate }}</strong></label>
+              <div class="col-md-2">
+                <input type="text" [(ngModel)]="userReceive" placeholder="{{ 'approval.InputCardNumber' | translate }}"
+                  name="userReceive" class="form-control">
+              </div>
+              <div class="col-md-2">
+                <button type="button" (click)="search()" class="btn btn-success btn-block"><i class="fa fa-search"></i>
+                  {{ 'approval.ButtonSearch' | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="card-body mt-1">
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>{{ 'approval.Table-column1' | translate }}</th>
+                  <th>{{ 'approval.Table-column2' | translate }}</th>
+                  <th>{{ 'approval.Table-column3' | translate }}</th>
+                  <th>{{ 'approval.Table-column7' | translate }}</th>
+                  <th>{{ 'approval.Table-column8' | translate }}</th>
+                  <th>{{ 'approval.Table-column9' | translate }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let receive of receives;let i = index">
+                  <td>{{i + 1}}</td>
+                  <td>{{receive.userID}}</td>
+                  <td>{{receive.id}}</td>
+                  <td>{{receive.register_Date | date: "MM/dd/yyyy,h:mm:ss a"}}</td>
+                  <td class="font-table align-middle arow" style='white-space: nowrap'>
+                    <button (click)="acceptReceive(receive.id)"
+                      class="btn btn-success">{{ 'approval.Status1' | translate }}</button>
+                    <button (click)="delineReceive(receive.id)"
+                      class="btn btn-danger ml-2">{{ 'approval.Status2' | translate }}</button>
+                  </td>
+                  <td class="button-center">
+                    <button (click)="detail()" class="btn btn-primary"><i class="icon-arrow-right-circle"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [(ngModel)]="pagination.currentPage"
+            [itemsPerPage]="pagination.itemsPerPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;"
+            nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [maxSize]="5">
+          </pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

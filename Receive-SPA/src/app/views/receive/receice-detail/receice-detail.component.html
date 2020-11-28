@@ -1,0 +1,41 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card mb-0">
+        <div class="card-header">
+          <strong>{{ 'receiveDetail.Table-column4' | translate }}</strong>
+          <button type="button" class="btn btn-sm btn-primary float-right" (click)="back()">
+            <i class="fa fa-chevron-left"></i> Back
+          </button>
+        </div>
+        <div class="card-body mt-1">
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Tên loại</th>
+                  <th>{{ 'receiveDetail.Table-column2' | translate }}</th>
+                  <th>{{ 'receiveDetail.Table-column3' | translate }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let receive of receiveDetails;let i = index">
+                  <td>
+                    {{receive.name_LL}}
+                  </td>
+                  <td>
+                    {{receive.productName}}
+
+                  </td>
+                  <td>
+                    {{receive.qty}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,108 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card mb-0">
+        <div class="card-header">
+          <strong>{{ 'receive.Title' | translate }}</strong>
+        </div>
+        <form class="form-horizontal">
+          <div class="card-body">
+            <div class="form-group row">
+              <div class="col-md-3">
+                <label class="badge badge-warning titleLabel">{{ 'receive.TitleWH' | translate }}</label>
+                <ng-select2 [data]="warehouses" [value]="warehouseID" [options]="optionsWarehouse" name="role"
+                  (valueChanged)="changeWarehouse($event)" [cssImport]=true [disabled]="disable"></ng-select2>
+              </div>
+              <div class="col-md-2">
+                <label class="badge badge-warning titleLabel">{{ 'receive.TitleCate' | translate }}</label>
+                <ng-select2 [data]="categories" [value]="cateID" [options]="optionsCategory" name="role"
+                  (valueChanged)="changeCategory($event)" [cssImport]=true [disabled]="disable"></ng-select2>
+              </div>
+              <div class="col-md-3">
+                <label class="badge badge-warning titleLabel">{{ 'receive.TitleProduct' | translate }}</label>
+                <ng-select2 [data]="products" [value]="productID" [options]="optionsProduct" name="role"
+                  (valueChanged)="changeProduct($event)" [cssImport]=true [disabled]="disable"></ng-select2>
+              </div>
+              <div class="col-md-2">
+                <label class="badge badge-warning titleLabel">{{ 'receive.Qty' | translate }}</label>
+                <input type="number" placeholder="{{'receive.Qty' | translate}}" [(ngModel)]="qty" min="0" max="100"
+                  name="qty" class="form-control qty-change">
+              </div>
+              <div class="col-md-2">
+                <button type="button" *ngIf="isAdd;else elseIsAdd" (click)="add()" class="btn btn-success mt-4"><i
+                    class="fa fa-plus"></i> {{ 'receive.ButtonAdd' | translate }}</button>
+                <ng-template #elseIsAdd>
+                  <button type="button" disabled class="btn btn-success mt-4"><i class="fa fa-plus"></i>
+                    {{ 'receive.ButtonAdd' | translate }}</button>
+                </ng-template>
+                <button type="button" *ngIf="showSave;" (click)="saveData()" class="btn btn-primary mt-4 save-change"><i
+                    class="fa fa-plus-square-o"></i> {{ 'receive.Table-column11' | translate }}</button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="card-body mt-1" *ngIf="receiveDetails.length > 0">
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th class="th1">Tên loại</th>
+                  <th class="th1">Tên sản phẩm</th>
+                  <th class="th1">{{ 'receive.Table-column4' | translate }}</th>
+                  <th class="th1">{{ 'receive.Table-column10' | translate }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of receiveDetails; let i = index">
+                  <td>{{item.catID}}</td>
+                  <td>{{item.productName}}</td>
+                  <td>{{item.qty}}</td>
+                  <td><button (click)="removeReceiveItem(i)"
+                      class="btn btn-danger">{{ 'receive.Table-column10' | translate }}</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-body mt-1">
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>{{ 'receive.Table-column1' | translate }}</th>
+                  <th>{{ 'receive.Table-column5' | translate }}</th>
+                  <th>{{ 'receive.Table-column6' | translate }}</th>
+                  <th>{{ 'receive.Table-column7' | translate }}</th>
+                  <th>{{ 'receive.Table-column8' | translate }}</th>
+                  <th>{{ 'receive.Table-column9' | translate }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let receive of receives;let i = index">
+                  <td>{{receive.id}}</td>
+                  <td>{{receive.accept_ID}}</td>
+                  <td>{{receive.register_Date | date: "MM/dd/yyyy"}}</td>
+                  <td>{{receive.accept_Date | date: "MM/dd/yyyy"}}</td>
+                  <td *ngIf="receive.status.trim() === '0'"><span
+                      style="color: red;">{{ 'receive.Status' | translate }}</span></td>
+                  <td *ngIf="receive.status.trim() === '1'">
+                    <button (click)="print(receive)"
+                      class="btn btn-primary">{{ 'receive.ButtonPrint' | translate }}</button>
+                  </td>
+                  <td class="button-center">
+                    <button (click)="detail(receive.id)" class="btn btn-primary"><i
+                        class="icon-arrow-right-circle"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [(ngModel)]="pagination.currentPage"
+            [itemsPerPage]="pagination.itemsPerPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;"
+            nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [maxSize]="5">
+          </pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
