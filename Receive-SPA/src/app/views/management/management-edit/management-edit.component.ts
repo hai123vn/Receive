@@ -44,6 +44,7 @@ export class ManagementEditComponent implements OnInit {
     this.receiveId = this.route.snapshot.params["receiveId"];
     if (this.receiveId !== null && this.receiveId !== undefined || this.receiveId !== '') {
       this.getAllCategory();
+      this.getAllProduct();
       this.getData();
     }
   }
@@ -58,14 +59,13 @@ export class ManagementEditComponent implements OnInit {
     this.productService.getAllCategories().subscribe(res => {
       this.categories = res.map(obj => {
         return { id: obj.id.toString(), text: obj.name_LL }
-      })
+      });
     })
   }
 
   getProductByCatID() {
     if (this.cateID !== '' && this.cateID !== undefined) {
       this.receiveService.getProductByCatID(this.cateID).subscribe(res => {
-        debugger
         this.products = res.map(obj => {
           return { id: obj.id.toString(), text: obj.id + "-" + obj.name }
         });
@@ -73,10 +73,16 @@ export class ManagementEditComponent implements OnInit {
     }
   }
 
+  getAllProduct() {
+    this.productService.getAllProduct().subscribe(res => {
+      this.products = res.map(obj => {
+        return { id: obj.id.toString(), text: obj.id + "-" + obj.name }
+      });
+    });
+  }
+
   changedCategory(e: any): void {
-    debugger
     this.cateID = e;
-    this.getProductByCatID();
   }
 
   changedProduct(e: any): void {

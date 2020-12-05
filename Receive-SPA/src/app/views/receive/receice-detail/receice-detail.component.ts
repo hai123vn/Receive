@@ -27,7 +27,6 @@ export class ReceiceDetailComponent implements OnInit {
   ngOnInit() {
     this.receiveService.currentReceiveID.subscribe(res => this.receiveId = res);
     this.receiveDetailService.currentBackUrl.subscribe(res => this.backUrl = res);
-    debugger
     this.loadData();
   }
 

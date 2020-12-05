@@ -87,7 +87,7 @@
                   <td *ngIf="user.roleID === 3 && history.status === '1'">{{ 'history.Status1' | translate }}</td>
                   <td *ngIf="user.roleID === 3 && history.status === '2'">{{ 'history.Status2' | translate }}</td>
                   <td class="button-center">
-                    <button (click)="detail()" class="btn btn-primary"><i class="icon-arrow-right-circle"></i></button>
+                    <button (click)="detail(history.id)" class="btn btn-primary"><i class="icon-arrow-right-circle"></i></button>
                   </td>
                 </tr>
               </tbody>

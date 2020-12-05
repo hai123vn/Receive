@@ -166,6 +166,8 @@ namespace Receive_API._Services.Services
             {
                 var receiveDetail = new Receive_Detail();
                 receiveDetail.ID = item.ID;
+                receiveDetail.CatID = item.CatID;
+                receiveDetail.CatName = item.CatName;
                 receiveDetail.ReceiveID = item.ReceiveID;
                 receiveDetail.ProductID = item.ProductID;
                 receiveDetail.ProductName = item.ProductName;

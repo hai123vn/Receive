@@ -54,8 +54,8 @@
               </thead>
               <tbody>
                 <tr *ngFor="let item of receiveDetails; let i = index">
-                  <td>{{item.catID}}</td>
-                  <td>{{item.productName}}</td>
+                  <td>{{item.catName }}</td>
+                  <td>{{item.productID + "-" + item.productName}} </td>
                   <td>{{item.qty}}</td>
                   <td><button (click)="removeReceiveItem(i)"
                       class="btn btn-danger">{{ 'receive.Table-column10' | translate }}</button></td>

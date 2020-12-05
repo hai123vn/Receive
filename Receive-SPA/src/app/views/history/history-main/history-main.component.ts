@@ -8,6 +8,7 @@ import { FunctionUtility } from '../../../_core/_utility/function-utility';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { ReceiveDetailService } from '../../../_core/_services/receive-detail.service';
+import { ReceiveService } from '../../../_core/_services/receive.service';
 
 @Component({
   selector: 'app-history-main',
@@ -32,7 +33,8 @@ export class HistoryMainComponent implements OnInit {
     private translate: TranslateService,
     private receiveDetailService: ReceiveDetailService,
     private router: Router,
-    private functionUtility: FunctionUtility) { }
+    private functionUtility: FunctionUtility,
+    private receiveService: ReceiveService) { }
 
   ngOnInit() {
     this.loadData();
@@ -114,8 +116,9 @@ export class HistoryMainComponent implements OnInit {
     this.changeNameDepartment();
   }
 
-  detail() {
+  detail(receiveID: string) {
     this.receiveDetailService.changeBackUrl('history');
+    this.receiveService.changeReceiveID(receiveID); 
     this.router.navigate(['/receive/manager/detail']);
   }
 }

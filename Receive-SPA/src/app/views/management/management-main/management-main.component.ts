@@ -9,6 +9,7 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { HistoryService } from '../../../_core/_services/history.service';
 import { FunctionUtility } from '../../../_core/_utility/function-utility';
 import { Receive } from '../../../_core/_models/receive';
+import { ReceiveService } from '../../../_core/_services/receive.service';
 
 @Component({
   selector: 'app-management-main',
@@ -31,7 +32,8 @@ export class ManagementMainComponent implements OnInit {
     private router: Router,
     private receiveDetailService: ReceiveDetailService,
     private functionUtility: FunctionUtility,
-    private alertify: AlertifyService) { }
+    private alertify: AlertifyService,
+    private receiveService: ReceiveService) { }
 
   ngOnInit() {
     this.loadDataAll();
@@ -108,8 +110,9 @@ export class ManagementMainComponent implements OnInit {
     this.loadDataAll();
   }
 
-  detail() {
+  detail(receiveID: string) {
     this.receiveDetailService.changeBackUrl('management');
+    this.receiveService.changeReceiveID(receiveID); 
     this.router.navigate(['/receive/manager/detail']);
   }
 }

@@ -68,6 +68,8 @@ export class ManagerService {
     return this.http.get<any>(this.baseUrl + 'manager/importExcel/', {});
   }
   editReceive(model: ReceiveDetail[]): Observable<any> {
+    model.forEach(item => item.catID = +item.catID);
+    debugger
     return this.http.post<any>(this.baseUrl + 'manager/editReceive', model, {});
   }
 }

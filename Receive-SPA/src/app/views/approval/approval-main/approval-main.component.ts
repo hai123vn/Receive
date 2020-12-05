@@ -6,6 +6,7 @@ import { ReceiveInfomationModel } from '../../../_core/_models/receiveInfomation
 import { AlertifyService } from '../../../_core/_services/alertify.service';
 import { ApprovalService } from '../../../_core/_services/approval.service';
 import { ReceiveDetailService } from '../../../_core/_services/receive-detail.service';
+import { ReceiveService } from '../../../_core/_services/receive.service';
 
 @Component({
   selector: 'app-approval-main',
@@ -24,6 +25,7 @@ export class ApprovalMainComponent implements OnInit {
   constructor(private alertify: AlertifyService,
     private approvalService: ApprovalService,
     private receiveDetailService: ReceiveDetailService,
+    private receiveService: ReceiveService,
     private router: Router,
     private translate: TranslateService) {
     translate.addLangs(['vi', 'zh']);
@@ -84,8 +86,9 @@ export class ApprovalMainComponent implements OnInit {
     });
   }
 
-  detail() {
+  detail(receiveID: string) {
     this.receiveDetailService.changeBackUrl('approval');
+    this.receiveService.changeReceiveID(receiveID); 
     this.router.navigate(['/receive/manager/detail']);
   }
 

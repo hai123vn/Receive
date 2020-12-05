@@ -1,10 +1,11 @@
 export interface ReceiveDetail {
     id: string;
-    receiveID: string;
     catID: number;
+    catName: string;
+    receiveID: string;
     productID: string;
     productName: string;
-    qty: string;
+    qty: number;
     update_By: string;
     update_Time: string;
 

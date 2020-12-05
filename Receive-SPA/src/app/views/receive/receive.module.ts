@@ -2,7 +2,7 @@ import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ReceiveRoutingModule } from './receive-routing.module';
-import { ReceiveMainComponent } from './receive-main/receive-main.component';
+import { CustomPipe, ReceiveMainComponent } from './receive-main/receive-main.component';
 import { NgSelect2Module } from 'ng-select2';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
@@ -22,6 +22,7 @@ import { ReceiceDetailComponent } from './receice-detail/receice-detail.componen
     ReceiveMainComponent,
     ReceivePrintComponent,
     ReceiceDetailComponent,
+    CustomPipe
   ],
   imports: [
     HttpClientModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { AlertifyService } from '../../../_core/_services/alertify.service';
 import { ReceiveService } from '../../../_core/_services/receive.service';
 import { Select2OptionData } from 'ng-select2';
@@ -10,7 +10,16 @@ import { ReceiveDetailModel } from '../../../_core/_models/receive-detail-model'
 import { Receive } from '../../../_core/_models/receive';
 import { ReceiveDetailService } from '../../../_core/_services/receive-detail.service';
 import { Category } from '../../../_core/_models/category';
-
+@Pipe({name: 'custom-pipe'})
+export class CustomPipe implements PipeTransform {
+  transform(value: string, list: Array<Select2OptionData>) {
+  //   if (!pipeToken) {
+  //     return value;
+  // }
+    let result = list.find(x => x.id == value).text;
+    return result;
+  }
+}
 @Component({
   selector: 'app-receive-main',
   templateUrl: './receive-main.component.html',
@@ -150,24 +159,21 @@ export class ReceiveMainComponent implements OnInit {
     this.router.navigate(['/receive/manager/print']);
   }
   add() {
-    debugger
-    let receiveFind = this.receiveDetails.filter(x => x.productID === this.productID
-    );
+    let receiveFind = this.receiveDetails.filter(x => x.productID === this.productID);
     if (receiveFind.length > 0) {
-      receiveFind[0].qty += 1;
+      receiveFind[0].qty += this.qty;
     } else {
-      let productName = this.products.filter(x => x.id === this.productID)[0].text;
-      let nameLL = this.categories.filter(x => x.id === this.cateID)[0].text;
-      debugger
+      let catID = this.categories.find(x => x.id === this.cateID).id;
+      let catName= this.categories.find(x => x.id === this.cateID).text;
+      let productName = this.products.find(x => x.id === this.productID).text;
+      productName = productName.substring(10, productName.length);
       let receiveDetailItem = {
-        catID: parseInt(this.cateID),
+        catID: +catID,
+        catName: catName,
         productID: this.productID,
         productName: productName,
         qty: this.qty
       };
-      if (receiveDetailItem.catID == this.categorys.id) {
-        
-      }
       this.receiveDetails.push(receiveDetailItem);
     }
     this.showSave = true;

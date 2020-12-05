@@ -80,6 +80,7 @@ namespace Receive_API._Services.Services
             {
                 var receiveDetail = new Receive_Detail();
                 receiveDetail.CatID = item.CatID;
+                receiveDetail.CatName = item.CatName;
                 receiveDetail.ReceiveID = receive.ID;
                 receiveDetail.ProductID = item.ProductID;
                 receiveDetail.ProductName = item.ProductName;
@@ -99,26 +100,10 @@ namespace Receive_API._Services.Services
             }
         }
 
-
         public async Task<PagedList<Receive>> GetWithPaginations(PaginationParams param, string userID)
         {
             var receives = _repoReceive.FindAll(x => x.UserID.Trim() == userID && x.Status != "-1"
-                                               && x.Status != "2").OrderByDescending(x=>x.Updated_Time);
-            // var data = (from a in receives  new ReceiveInformationModel() {
-            //         ID = a.ID,
-            //         UserID = a.UserID,
-            //         Accept_ID = a.Accept_ID,
-            //         DepID = a.DepID,
-            //         ProductID = a.ProductID,
-            //         ProductName = b.Name,
-            //         Qty = a.Qty,
-            //         Register_Date = a.Register_Date,
-            //         Accept_Date = a.Accept_Date,
-            //         Status = a.Status,
-            //         Updated_By = a.Updated_By,
-            //         Updated_Time = a.Updated_Time
-            //     }).OrderByDescending(x => x.Register_Date);
-
+                                               && x.Status != "2").OrderByDescending(x => x.Updated_Time);
             return await PagedList<Receive>.CreateAsync(receives, param.PageNumber, param.PageSize);
         }
 

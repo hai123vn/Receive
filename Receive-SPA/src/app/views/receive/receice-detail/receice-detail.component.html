@@ -21,10 +21,10 @@
               <tbody>
                 <tr *ngFor="let receive of receiveDetails;let i = index">
                   <td>
-                    {{receive.name_LL}}
+                    {{receive.catName}}
                   </td>
                   <td>
-                    {{receive.productName}}
+                    {{receive.productID + "-" + receive.productName }}
 
                   </td>
                   <td>
